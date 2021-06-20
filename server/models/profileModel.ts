@@ -1,10 +1,16 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, ObjectId } from "mongoose";
 
-const Profile = new Schema(
+export interface Profile {
+  name: string;
+  characters: ObjectId[];
+}
+
+const ProfileSchema = new Schema<Profile>(
   {
     name: { type: String, required: true },
+    characters: [{ type: Schema.Types.ObjectId, ref: "character" }],
   },
   { timestamps: true }
 );
 
-export default model("profiles", Profile);
+export default model<Profile>("profiles", ProfileSchema);
