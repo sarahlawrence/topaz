@@ -1,6 +1,6 @@
 const ProfileModel = require("../models/profileModel");
 
-createProfile = (req, res) => {
+const createProfile = (req, res) => {
   const body = req.body;
 
   if (!body) {
