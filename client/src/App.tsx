@@ -1,21 +1,22 @@
 import React from "react";
+import { useGetProfilesQuery } from "./store/api";
 
 function App() {
+  const { data, error, isLoading } = useGetProfilesQuery("");
+
+  console.log(data);
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {isLoading ? (
+        <p>App is loading....</p>
+      ) : (
+        <div>
+          Select profile:
+          {data.profiles.map((x: any, index: number) => (
+            <p key={index}>{x.name}</p>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
