@@ -1,4 +1,4 @@
-const ProfileModel = require("../models/profileModel");
+import ProfileModel from "../models/profileModel";
 
 const createProfile = (req, res) => {
   const body = req.body;
@@ -12,7 +12,9 @@ const createProfile = (req, res) => {
   const profile = new ProfileModel(body);
 
   if (!profile) {
-    return res.status(400).json({ success: false, error: err });
+    return res
+      .status(400)
+      .json({ success: false, error: "Profile not created" });
   }
 
   profile
@@ -31,6 +33,4 @@ const createProfile = (req, res) => {
     });
 };
 
-module.exports = {
-  createProfile,
-};
+export { createProfile };
