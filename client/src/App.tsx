@@ -1,24 +1,25 @@
 import React from "react";
-import { useGetProfilesQuery } from "./store/api";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Landing from "./containers/Landing";
+import Profile from "./containers/ProfileList";
+// import Character from "./containers/Character";
 
-function App() {
-  const { data, error, isLoading } = useGetProfilesQuery("");
-
-  console.log(data);
+export default function App() {
   return (
-    <div className="App">
-      {isLoading ? (
-        <p>App is loading....</p>
-      ) : (
-        <div>
-          Select profile:
-          {data.profiles.map((x: any, index: number) => (
-            <p key={index}>{x.name}</p>
-          ))}
-        </div>
-      )}
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Landing />
+        </Route>
+
+        <Route path="/profile/:id">
+          <Profile />
+        </Route>
+
+        <Route path="/character/:id">
+          <div>hello</div>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
-
-export default App;
