@@ -73,4 +73,23 @@ const getCharactersByProfileId = (req, res) => {
   );
 };
 
-export { getCharacters, createCharacter, getCharactersByProfileId };
+const getCharacterById = (req, res) => {
+  const characterId = req.params.characterId;
+  CharacterModel.findById(characterId, (err, character) => {
+    if (err) {
+      res.status(400).json({ error: err });
+    }
+    if (!character) {
+      res.status(404).json({ message: "Character not found" });
+    }
+
+    return res.status(200).json({ success: true, character });
+  });
+};
+
+export {
+  getCharacters,
+  createCharacter,
+  getCharactersByProfileId,
+  getCharacterById,
+};

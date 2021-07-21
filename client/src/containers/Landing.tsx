@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useGetProfilesQuery } from "../store/api";
 
 function LandingContainer() {
-  const { data, error, isLoading } = useGetProfilesQuery("");
+  const { data, isLoading } = useGetProfilesQuery("");
 
   return (
     <div className="App">
@@ -13,8 +13,8 @@ function LandingContainer() {
         <div>
           Select a profile:
           <ul>
-            {data.profiles.map((p: any) => (
-              <li>
+            {data.profiles.map((p: any, index: number) => (
+              <li key={index}>
                 <Link to={`/profile/${p._id}`}>{p.name}</Link>
               </li>
             ))}

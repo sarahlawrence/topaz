@@ -8,10 +8,17 @@ export const api = createApi({
     getProfiles: builder.query({
       query: () => `profile`,
     }),
-    getCharacters: builder.query({
-      query: (profileId) => `character/${profileId}`,
+    getCharactersForProfile: builder.query({
+      query: (profileId) => `character/all/${profileId}`,
+    }),
+    getCharacter: builder.query({
+      query: (characterId) => `character/${characterId}`,
     }),
   }),
 });
 
-export const { useGetProfilesQuery, useGetCharactersQuery } = api;
+export const {
+  useGetProfilesQuery,
+  useGetCharactersForProfileQuery,
+  useGetCharacterQuery,
+} = api;

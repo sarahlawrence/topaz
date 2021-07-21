@@ -4,13 +4,14 @@ import {
   createCharacter,
   getCharacters,
   getCharactersByProfileId,
+  getCharacterById,
 } from "../controllers/characterController";
 
 const router = Router();
 
 router.get("/", getCharacters);
 router.post("/", createCharacter);
-router.get("/:profileId", getCharactersByProfileId);
-router.get("/:profileId/:characterId", getCharactersByProfileId);
+router.get("/all/:profileId", getCharactersByProfileId);
+router.get("/:characterId", getCharacterById);
 
 export default router;

@@ -7,7 +7,7 @@ export interface Character {
 const CharacterSchema = new Schema<Character>(
   {
     name: { type: String, required: true },
-    profile: { type: Schema.Types.ObjectId, ref: "profile", required: true },
+    creator: { type: Schema.Types.ObjectId, ref: "profile", required: true },
   },
   { timestamps: true }
 );
