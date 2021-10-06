@@ -1,10 +1,10 @@
+import { Request } from "express";
 import { Types } from "mongoose";
 import CharacterModel from "../models/characterModel";
 import ProfileModel from "../models/profileModel";
 
-const createCharacter = async (req, res) => {
+const createCharacter = async (req: Request, res) => {
   const body = req.body;
-
   if (!body || !body.profile) {
     return res.status(400).json({ success: false, error: "No data provided" });
   }
@@ -16,7 +16,7 @@ const createCharacter = async (req, res) => {
     return res.status(401).json({ success: false, error: "Profile not found" });
   }
 
-  const character = new CharacterModel({ profile: profile._id, ...rest });
+  const character = new CharacterModel({ owner: profile._id, ...rest });
   if (!character) {
     return res
       .status(400)
@@ -58,19 +58,16 @@ const getCharacters = (req, res) => {
 
 const getCharactersByProfileId = (req, res) => {
   const profile = req.params.profileId;
-  CharacterModel.find(
-    { profile: Types.ObjectId(profile) },
-    (err, characters) => {
-      if (err) {
-        res.status(400).json({ error: err });
-      }
-      if (!characters) {
-        res.status(404).json({ message: "Characters not found" });
-      }
-
-      return res.status(200).json({ success: true, characters });
+  CharacterModel.find({ owner: Types.ObjectId(profile) }, (err, characters) => {
+    if (err) {
+      res.status(400).json({ error: err });
     }
-  );
+    if (!characters) {
+      res.status(404).json({ message: "Characters not found" });
+    }
+
+    return res.status(200).json({ success: true, characters });
+  });
 };
 
 const getCharacterById = (req, res) => {

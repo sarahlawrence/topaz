@@ -5,8 +5,8 @@ import { Loading } from "../components/LoadingSpinner";
 import { connect } from "react-redux";
 
 function CharacterContainer() {
-  const { id } = useParams() as any;
-  const { data, isLoading } = useGetCharacterQuery(id);
+  const { id: profileId } = useParams() as any;
+  const { data, isLoading } = useGetCharacterQuery(profileId);
 
   if (isLoading || !data) {
     return <Loading />;

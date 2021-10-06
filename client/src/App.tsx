@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Landing from "./containers/Landing";
 import Profile from "./containers/Profile";
 import Character from "./containers/Character";
+import CreateCharacter from "./containers/CreateCharacter";
 import { NavBar } from "./components/NavBar";
 
 export default function App() {
@@ -20,6 +21,10 @@ export default function App() {
 
         <Route path="/character/:id">
           <Character />
+        </Route>
+
+        <Route path="/create-character">
+          <CreateCharacter />
         </Route>
       </Switch>
     </Router>

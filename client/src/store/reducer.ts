@@ -1,9 +1,13 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createReducer, createAction } from "@reduxjs/toolkit";
 
 const initialState = {
-  isLoading: false,
+  current: "",
 };
 
-export const reducer = createReducer(initialState, (builder) => {
+const setProfile = createAction<string>("set_profile");
+export const profileReducer = createReducer(initialState, (builder) => {
+  builder.addCase(setProfile, (state, action) => {
+    state.current = action.payload;
+  });
   builder.addDefaultCase((state, action) => state);
 });
