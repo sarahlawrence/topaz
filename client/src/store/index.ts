@@ -1,13 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { api } from "./api";
+import { profileApi } from "./getProfile";
+import { characterApi } from "./getCharacter";
 
 const store = configureStore({
   reducer: {
-    [api.reducerPath]: api.reducer,
+    [profileApi.reducerPath]: profileApi.reducer,
+    [characterApi.reducerPath]: characterApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware),
+    getDefaultMiddleware()
+      .concat(profileApi.middleware)
+      .concat(characterApi.middleware),
+
   devTools: true,
 });
 

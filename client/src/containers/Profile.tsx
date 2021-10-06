@@ -1,13 +1,18 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { useGetCharactersForProfileQuery } from "../store/api";
+import { Loading } from "../components/LoadingSpinner";
+import { useGetCharactersForProfileQuery } from "../store/getCharacter";
 
 function ProfileContainer() {
   const { id } = useParams() as any;
   const { data, isLoading } = useGetCharactersForProfileQuery(id);
 
+  if (isLoading || !data) {
+    return <Loading />;
+  }
+
   return (
-    <div className="App">
+    <div className="profile">
       {isLoading ? (
         <p>App is loading....</p>
       ) : (

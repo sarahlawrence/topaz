@@ -1,23 +1,22 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useGetCharacterQuery } from "../store/api";
-import { withLoadingSpinner } from "../components/withLoadingSpinner";
-import { connect, useSelector } from "react-redux";
+import { useGetCharacterQuery } from "../store/getCharacter";
+import { Loading } from "../components/LoadingSpinner";
+import { connect } from "react-redux";
 
 function CharacterContainer() {
   const { id } = useParams() as any;
-  const { data } = useGetCharacterQuery(id);
+  const { data, isLoading } = useGetCharacterQuery(id);
+
+  if (isLoading || !data) {
+    return <Loading />;
+  }
 
   return (
-    <div className="App">?{/* <div>Hello {data.character.name}</div>  */}</div>
+    <div className="character">
+      <h1>{data.character.name}</h1>
+    </div>
   );
 }
-
-// class CharacterContainer extends React.Component<any, any> {
-//   render() {
-//     console.log("CC", this.props);
-//     return <div>???</div>;
-//   }
-// }
 
 export default connect((state) => state)(CharacterContainer);
