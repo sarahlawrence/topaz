@@ -8,6 +8,7 @@ const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),
+  devTools: true,
 });
 
 setupListeners(store.dispatch);
